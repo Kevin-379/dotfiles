@@ -1,0 +1,38 @@
+[url "ssh://code.uber.internal/"]
+	insteadOf = https://code.uber.internal/
+[url "ssh://config.uber.internal/"]
+	insteadOf = https://config.uber.internal/
+[url "ssh://gitolite@code.uber.internal/"]
+	insteadOf = git://code.uber.internal/
+[credential "https://git.uberinternal.com"]
+	helper = usso
+[credential "https://vfs4g-cache.uberinternal.com"]
+	helper = usso
+[http "https://gopkg.uberinternal.com"]
+	followRedirects = true
+[http "https://gopkg.in"]
+	followRedirects = true
+[user]
+	email = skevin@uber.com
+	name = Kevin Shah
+	signingkey = D7B8E7435538367C92E249DA5A025180A958BF97
+[maintenance]
+	repo = /Users/skevin/Uber/ios
+	repo = /Users/skevin/Uber/go-code-sparse
+	auto = false
+	strategy = incremental
+	repo = /Users/skevin/Uber/android
+	repo = /Users/skevin/Uber/go-code
+[core]
+	pager = less -FR -+X --mouse
+	commentChar = ";"
+[push]
+	default = current
+[init]
+	defaultBranch = main
+[gpg]
+	format = x509
+[gpg "x509"]
+	program = /opt/uber/bin/signingfx
+[rebase]
+	updateRefs = false

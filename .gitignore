@@ -1,0 +1,13 @@
+# .gitignore for dotfiles repo
+
+# Fish — runtime state & plugin-generated files
+.config/fish/fish_variables
+.config/fish/functions/
+.config/fish/completions/
+.config/fish/themes/
+
+# tmux — plugins managed by tpm
+.tmux/plugins/
+
+# nvim — runtime data (lazy keeps this in stdpath('data'), not here)
+# lazy-lock.json is intentionally tracked

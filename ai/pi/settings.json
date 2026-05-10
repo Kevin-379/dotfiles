@@ -1,0 +1,11 @@
+{
+  "lastChangelogVersion": "0.74.0",
+  "defaultProvider": "anthropic",
+  "defaultModel": "claude-sonnet-4-6",
+  "steeringMode": "all",
+  "followUpMode": "all",
+  "packages": [
+    "npm:pi-mcp-adapter",
+    "../../../../opt/homebrew/lib/node_modules/vim-motions-pi"
+  ]
+}
