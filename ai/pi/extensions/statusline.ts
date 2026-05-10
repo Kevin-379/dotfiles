@@ -71,7 +71,7 @@ export default function (pi: ExtensionAPI) {
 					// --- context usage (for progress bar) ---
 					const ctxUsage = ctx.getContextUsage();
 					const pct = ctxUsage?.percent ?? null;
-					const totalTok = ctxUsage?.tokens ?? (inputTok + outputTok + cacheRead + cacheWrite);
+					const totalTok = ctxUsage?.tokens ?? 0;
 
 					// --- token color ---
 					const tokColor: "success" | "warning" | "error" | "accent" =
