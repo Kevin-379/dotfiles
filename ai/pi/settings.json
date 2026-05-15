@@ -4,6 +4,7 @@
   "defaultModel": "claude-sonnet-4-6",
   "steeringMode": "all",
   "followUpMode": "all",
+  "quietStartup": true,
   "powerline": {
     "preset": "custom",
     "fixedEditor": true,
