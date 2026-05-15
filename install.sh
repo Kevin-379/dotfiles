@@ -38,7 +38,7 @@ linkto "ai/AGENTS.md"                          ".pi/agent/AGENTS.md"
 linkto "ai/CLAUDE.md"                          ".claude/CLAUDE.md"
 linkto "ai/pi/extensions/cmux-notify.ts"       ".pi/agent/extensions/cmux-notify.ts"
 linkto "ai/pi/extensions/exit.ts"              ".pi/agent/extensions/exit.ts"
-linkto "ai/pi/extensions/statusline.ts"        ".pi/agent/extensions/statusline.ts"
+# statusline.ts superseded by pi-powerline-footer fork — not linked
 linkto "ai/pi/extensions/uber-genai.js"        ".pi/agent/extensions/uber-genai.js"
 linkto "ai/pi/extensions/utrim-bash.ts"        ".pi/agent/extensions/utrim-bash.ts"
 linkto "ai/pi/extensions/whimsical.ts"         ".pi/agent/extensions/whimsical.ts"

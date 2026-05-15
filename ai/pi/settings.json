@@ -4,8 +4,14 @@
   "defaultModel": "claude-sonnet-4-6",
   "steeringMode": "all",
   "followUpMode": "all",
+  "powerline": {
+    "preset": "custom",
+    "fixedEditor": true,
+    "mouseScroll": true
+  },
   "packages": [
     "npm:pi-mcp-adapter",
-    "../../../../opt/homebrew/lib/node_modules/vim-motions-pi"
+    "../../../../opt/homebrew/lib/node_modules/vim-motions-pi",
+    "../../Personal/pi-powerline-footer"
   ]
 }

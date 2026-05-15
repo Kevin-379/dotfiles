@@ -25,6 +25,14 @@
 	1. Open tmux and press `prefix + I` (Ctrl-a + I)
 14. Ghostty SSH terminfo for remote hosts
 	1. `infocmp -x xterm-ghostty | ssh <host> -- tic -x -`
+15. Install pi coding agent
+	1. `npm install -g @earendil-works/pi-coding-agent`
+16. Install vim-motions-pi globally
+	1. `npm install -g vim-motions-pi`
+17. Clone pi-powerline-footer fork
+	1. `git clone https://github.com/Kevin-379/pi-powerline-footer.git ~/Personal/pi-powerline-footer`
+	2. `cd ~/Personal/pi-powerline-footer && git checkout personal`
+	3. Add upstream: `git remote add upstream https://github.com/nicobailon/pi-powerline-footer.git`
 ## Tools
 1. rg
 2. fzf
