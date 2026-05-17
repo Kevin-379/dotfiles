@@ -24,6 +24,8 @@ The pi status bar is driven by a personal fork of [pi-powerline-footer](https://
 - `context_bar` segment — token count with progress bar
 - Chat/editor separator line
 - vim-motions-pi compatibility (removed `setEditorComponent` override)
+- `extension_statuses` added to `custom` preset secondary line (shows TPS, MCP status, etc.)
+- Session name displayed on the top border of the input box when set via `/name`
 
 The fork lives at `~/Personal/pi-powerline-footer` and is referenced by path in `ai/pi/settings.json`. See Install.md step 17 for setup.
 
