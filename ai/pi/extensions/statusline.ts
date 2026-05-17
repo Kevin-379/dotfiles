@@ -8,6 +8,16 @@ const ORANGE_PCT = 30;
 const RED_PCT = 40;
 const BAR_WIDTH = 20;
 
+const C_RESET = "\x1b[0m";
+const C_GREEN = "\x1b[32m";
+const C_YELLOW = "\x1b[33m";
+const C_ORANGE = "\x1b[38;5;208m";
+const C_RED = "\x1b[31m";
+
+function ctxColor(code: string, text: string): string {
+	return `${code}${text}${C_RESET}`;
+}
+
 function fmtTokens(n: number): string {
 	if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}m`;
 	if (n >= 1_000) return `${Math.floor(n / 1_000)}k`;
@@ -74,12 +84,12 @@ export default function (pi: ExtensionAPI) {
 					const totalTok = ctxUsage?.tokens ?? 0;
 
 					// --- token color ---
-					const tokColor: "success" | "warning" | "error" | "accent" =
-						pct === null ? "accent"
-						: pct >= RED_PCT ? "error"
-						: pct >= ORANGE_PCT ? "warning"
-						: pct >= YELLOW_PCT ? "accent"
-						: "success";
+					const tokCode =
+						pct === null ? C_YELLOW
+						: pct >= RED_PCT ? C_RED
+						: pct >= ORANGE_PCT ? C_ORANGE
+						: pct >= YELLOW_PCT ? C_YELLOW
+						: C_GREEN;
 
 					// --- line 1: user@host:dir (branch) | tokens [bar] ---
 					const user = process.env["USER"] ?? process.env["UBER_LDAP_UID"] ?? "";
@@ -102,7 +112,7 @@ export default function (pi: ExtensionAPI) {
 
 					const bar = pct !== null ? ` ${progressBar(pct)}` : "";
 					const tokStr = `${fmtTokens(totalTok)}${bar}`;
-					const tokenPart = theme.fg(tokColor, tokStr);
+					const tokenPart = ctxColor(tokCode, tokStr);
 
 					const sep = ` ${theme.fg("dim", "|")} `;
 					const line1 = truncateToWidth(location + sep + tokenPart, width);
