@@ -50,6 +50,10 @@ export default function (pi) {
 				name: "Claude Opus 4.6",
 				api: "anthropic-messages",
 				reasoning: true,
+				thinkingLevelMap: {
+					minimal: null,
+					xhigh: "max",
+				},
 				input: ["text", "image"],
 				cost: { input: 5, output: 25, cacheRead: 0.5, cacheWrite: 6.25 },
 				contextWindow: 1000000,
@@ -60,6 +64,10 @@ export default function (pi) {
 				name: "Claude Opus 4.7",
 				api: "anthropic-messages",
 				reasoning: true,
+				thinkingLevelMap: {
+					minimal: null,
+					xhigh: "xhigh",
+				},
 				input: ["text", "image"],
 				cost: { input: 5, output: 25, cacheRead: 0.5, cacheWrite: 6.25 },
 				contextWindow: 1000000,
@@ -70,6 +78,9 @@ export default function (pi) {
 				name: "Claude Sonnet 4.6",
 				api: "anthropic-messages",
 				reasoning: true,
+				thinkingLevelMap: {
+					minimal: null,
+				},
 				input: ["text", "image"],
 				cost: { input: 3, output: 15, cacheRead: 0.3, cacheWrite: 3.75 },
 				contextWindow: 1000000,
@@ -88,6 +99,11 @@ export default function (pi) {
 				name: "GPT-5.5",
 				api: "openai-responses",
 				reasoning: true,
+				thinkingLevelMap: {
+					off: "none",
+					minimal: null,
+					xhigh: "xhigh",
+				},
 				input: ["text", "image"],
 				cost: { input: 5, output: 30, cacheRead: 0.5, cacheWrite: 0 },
 				contextWindow: 272000,

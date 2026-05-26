@@ -56,7 +56,7 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 ## 5. MCP Usage
 
-**Three MCP servers are configured: `engwiki`, `t3`, and `omni-mcp`.**
+**Two MCP servers are configured: `engwiki` and `t3`.**
 
 All MCP calls go through the `mcp({})` proxy tool (pi-mcp-adapter). Docker must be running for `t3` to connect.
 
@@ -78,41 +78,55 @@ mcp({ tool: "t3_jira_search", args: '{"jql": "project = DEVEXP"}' })
 
 ### omni-mcp — all other Uber services
 
-omni-mcp proxies all other MCP servers at Uber. Route through its three tools:
+Use `aifx mcp call omni-mcp` to reach all other MCP servers at Uber:
 
-1. **`discover_tools`** — List available tools on a specific server.
-   - Input: `{ "server_name": "<server>" }`
+```bash
+# List available tools on a server
+aifx mcp call omni-mcp omni_mcp_discover_tools --args '{"server_name": "usearch-backend"}'
 
-2. **`get_tool_schema`** — Get the full input schema for a specific tool.
-   - Input: `{ "server_name": "<server>", "tool_name": "<tool>" }`
+# Get the full input schema for a specific tool
+aifx mcp call omni-mcp omni_mcp_get_tool_schema --args '{"server_name": "usearch-backend", "tool_name": "usearchbackend_searchv2"}'
 
-3. **`invoke_tool`** — Execute a tool on any server.
-   - Input: `{ "server": "<server>", "tool": "<tool>", "arguments": { ... } }`
-
-```
-mcp({ tool: "discover_tools", args: '{"server_name": "usearch-backend"}' })
-mcp({ tool: "get_tool_schema", args: '{"server_name": "usearch-backend", "tool_name": "usearchbackend_searchv2"}' })
-mcp({ tool: "invoke_tool", args: '{"server": "usearch-backend", "tool": "usearchbackend_searchv2", "arguments": {"query": "bazel"}}' })
+# Execute a tool on any server
+aifx mcp call omni-mcp omni_mcp_invoke_tool --args '{"server": "usearch-backend", "tool": "usearchbackend_searchv2", "arguments": {"query": "bazel"}}'
 ```
 
 **Workflow:**
 ```
 IF you know the server, tool name, AND required arguments:
-  → Call invoke_tool directly.
+  → Call omni_mcp_invoke_tool directly.
 
 IF you know the server but not the exact tool name:
-  → Call discover_tools(server_name), then invoke_tool.
+  → Call omni_mcp_discover_tools(server_name), then omni_mcp_invoke_tool.
 
 IF you know the server and tool but not the exact arguments:
-  → Call get_tool_schema(server_name, tool_name), then invoke_tool.
+  → Call omni_mcp_get_tool_schema(server_name, tool_name), then omni_mcp_invoke_tool.
 ```
 
 **Rules:**
 - **Skip discover/inspect when you can.** Go straight to the call when you have enough info.
-- **Parallelize independent calls.** Call multiple servers at once when possible.
-- **Handle large responses.** Summarize or extract relevant parts rather than dumping everything.
+- **Parallelize independent calls.** Use multiple `aifx mcp call` commands when possible.
+- **Handle large responses.** Use `-o <file>` to save large outputs. Summarize or extract relevant parts.
 - **Don't guess server or tool names.** Typos will fail silently.
 - **Time parameters.** Many tools accept RFC3339 timestamps (e.g., `2026-03-25T10:00:00Z`). Some accept relative offsets (e.g., `"2h"`, `"30m"`). Check the tool schema.
+
+### aifx mcp call — shell alternative for omni-mcp and other servers
+
+You can also call MCP tools directly from the shell using `aifx mcp call` (not available for `engwiki` or `t3`):
+
+```bash
+# Call a tool and write output to a file
+aifx mcp call <server> <tool> --args '<json>' -o <output-file>
+
+# List available tools on a server
+aifx mcp call <server> --list-tools
+
+# Examples
+aifx mcp call logging-mcp lucene_query_logs --args '{"lucene_query": "...", "namespaces": ["my-service"]}' -o /tmp/logs.json
+aifx mcp call queryrunner-mcp execute_query --args '{"query": "SELECT 1"}'
+```
+
+Use `aifx mcp call` when you need to pipe or save large responses to a file.
 
 ## 6. Coding Style
 
@@ -120,7 +134,6 @@ IF you know the server and tool but not the exact arguments:
 
 - Order struct fields top-down (most significant fields first, matching logical flow).
 - Format multi-argument calls, method chains, and nested structs across multiple lines — one argument or field per line.
-- Use the Read and Edit tools instead of shell commands like `sed`, `awk`, or `python` for file modifications.
 
 ## 7. Testing
 
@@ -129,6 +142,9 @@ IF you know the server and tool but not the exact arguments:
 - Assert entire structs, not individual fields — verify the full output in one assertion.
 - Hardcode values in unit tests — avoid helper functions or computed expected values that obscure intent.
 - Consolidate test cases — don't create separate tests for trivially similar scenarios; use table-driven tests and merge cases where it makes sense.
+- Use `assert` instead of `require` unless a nil-deref or panic would follow.
+- Always use `.With` or `.When` and `.Times` on mocks — never leave mock expectations implicit.
+- Name tests using the pattern `should_return_<value>_when_<condition>` (e.g., `should_return_error_when_gateway_fails`).
 
 ## 8. Disk / Cache Safety
 
@@ -140,5 +156,11 @@ IF you know the server and tool but not the exact arguments:
 ## 9. Git Rules
 
 1. **NEVER create a git worktree** without explicit user approval.
-2. **NEVER create a PR** (via `arh publish`, `gh pr create`, or any other tool) without explicit user approval.
-3. **NEVER post comments on a PR** without explicit user approval.
+2. **NEVER push any branch** without explicit user approval.
+3. **NEVER create a PR** (via `arh publish`, `gh pr create`, or any other tool) without explicit user approval.
+4. **NEVER post comments on a PR** without explicit user approval.
+
+## 10. Go code rules
+
+1. Prefer `bin/coverage /path/to/folder` over `bazel test`.
+2. **Always** use `bin/gazelle` instead of gazelle.
