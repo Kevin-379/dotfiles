@@ -17,18 +17,29 @@ git clone <skill-repo> ~/.agents/skills/<skill-name>
 
 ## Installed skills
 
-| Skill | Trigger |
-|-------|---------|
-| `session-save` | "save session", "checkpoint", "preserve context" |
-| `session-restore` | "restore session", "load session", "resume project" |
-| `session-list` | "list sessions", "show sessions", "available sessions" |
-| `checkpoint` | "checkpoint", "create milestone", "snapshot this" |
-| `grill-me` | "grill me" — relentless design interview |
-| `grill-with-docs` | stress-test a plan against CONTEXT.md / ADRs |
-| `improve-codebase-architecture` | find deepening opportunities in a codebase |
-| `tdd` | "red-green-refactor", test-first development |
-| `zoom-out` | broader context / higher-level perspective |
-| `find-skills` | "find a skill for X", "is there a skill that..." |
+- brainstorming
+- caveman
+- checkpoint
+- dispatching-parallel-agents
+- executing-plans
+- finishing-a-development-branch
+- grill-me
+- grill-with-docs
+- improve-codebase-architecture
+- receiving-code-review
+- requesting-code-review
+- session-list
+- session-restore
+- session-save
+- subagent-driven-development
+- systematic-debugging
+- tdd
+- test-driven-development
+- using-git-worktrees
+- verification-before-completion
+- writing-plans
+- writing-skills
+- zoom-out
 
 ## Pi packages
 
