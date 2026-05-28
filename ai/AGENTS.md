@@ -82,25 +82,25 @@ Use `aifx mcp call omni-mcp` to reach all other MCP servers at Uber:
 
 ```bash
 # List available tools on a server
-aifx mcp call omni-mcp omni_mcp_discover_tools --args '{"server_name": "usearch-backend"}'
+aifx mcp call omni-mcp discover_tools --args '{"server_name": "usearch-backend"}'
 
 # Get the full input schema for a specific tool
-aifx mcp call omni-mcp omni_mcp_get_tool_schema --args '{"server_name": "usearch-backend", "tool_name": "usearchbackend_searchv2"}'
+aifx mcp call omni-mcp get_tool_schema --args '{"server_name": "usearch-backend", "tool_name": "usearchbackend_searchv2"}'
 
 # Execute a tool on any server
-aifx mcp call omni-mcp omni_mcp_invoke_tool --args '{"server": "usearch-backend", "tool": "usearchbackend_searchv2", "arguments": {"query": "bazel"}}'
+aifx mcp call omni-mcp invoke_tool --args '{"server": "usearch-backend", "tool": "usearchbackend_searchv2", "arguments": {"query": "bazel"}}'
 ```
 
 **Workflow:**
 ```
 IF you know the server, tool name, AND required arguments:
-  → Call omni_mcp_invoke_tool directly.
+  → Call invoke_tool directly.
 
 IF you know the server but not the exact tool name:
-  → Call omni_mcp_discover_tools(server_name), then omni_mcp_invoke_tool.
+  → Call discover_tools(server_name), then invoke_tool.
 
 IF you know the server and tool but not the exact arguments:
-  → Call omni_mcp_get_tool_schema(server_name, tool_name), then omni_mcp_invoke_tool.
+  → Call get_tool_schema(server_name, tool_name), then invoke_tool.
 ```
 
 **Rules:**
