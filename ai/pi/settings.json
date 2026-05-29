@@ -1,18 +1,27 @@
 {
-  "lastChangelogVersion": "0.74.0",
-  "defaultProvider": "anthropic",
-  "defaultModel": "claude-sonnet-4-6",
+  "lastChangelogVersion": "0.77.0",
+  "defaultProvider": "openai",
+  "defaultModel": "gpt-5.5",
   "steeringMode": "all",
-  "followUpMode": "all",
+  "followUpMode": "one-at-a-time",
   "quietStartup": true,
+  "packages": [
+    "npm:pi-token-speed",
+    "npm:pi-mcp-adapter",
+    "npm:vim-motions-pi",
+    "npm:@plannotator/pi-extension",
+    "/home/user/pi-powerline-footer",
+    "npm:pi-context"
+  ],
   "powerline": {
     "preset": "custom",
     "fixedEditor": true,
     "mouseScroll": true
   },
-  "packages": [
-    "npm:pi-mcp-adapter",
-    "../../../../opt/homebrew/lib/node_modules/vim-motions-pi",
-    "../../Personal/pi-powerline-footer"
-  ]
+  "startupModel": {
+    "model": "openai/gpt-5.5",
+    "thinkingLevel": "medium"
+  },
+  "defaultThinkingLevel": "medium",
+  "enableSkillCommands": true
 }
