@@ -9,6 +9,110 @@ const GATEWAY = "https://genai-api.uberinternal.com";
 const GATEWAY_V1 = `${GATEWAY}/v1`;
 const GATEWAY_HOST = "genai-api.uberinternal.com";
 const HEADERS = { "OpenAI-Organization": ORG_ID };
+const WEB_SEARCH_SOURCES_INCLUDE = "web_search_call.action.sources";
+const ANTHROPIC_WEB_SEARCH_TYPE = "web_search_20260209";
+const ANTHROPIC_WEB_SEARCH_MAX_USES = 5;
+
+function isRecord(value) {
+	return typeof value === "object" && value !== null;
+}
+
+function isUberOpenAiResponses(ctx) {
+	return ctx.model?.provider === "openai" && ctx.model?.api === "openai-responses";
+}
+
+function isUberAnthropicMessages(ctx) {
+	return ctx.model?.provider === "anthropic" && ctx.model?.api === "anthropic-messages";
+}
+
+function isNativeOpenAiWebSearchType(value) {
+	return value === "web_search" || value === "web_search_preview";
+}
+
+function isNativeAnthropicWebSearchType(value) {
+	return typeof value === "string" && /^web_search_\d{8}$/.test(value);
+}
+
+function sanitizeTools(tools, isNativeWebSearchType) {
+	const sanitized = [];
+	for (const tool of tools) {
+		if (!isRecord(tool)) {
+			continue;
+		}
+
+		const shouldStripFunctionVariant =
+			tool.name === "web_search" && !isNativeWebSearchType(tool.type);
+		if (!shouldStripFunctionVariant) {
+			sanitized.push(tool);
+		}
+	}
+	return sanitized;
+}
+
+function includeWebSearchSources(payload) {
+	const payloadInclude = payload.include;
+	const include = Array.isArray(payloadInclude)
+		? payloadInclude.filter((value) => typeof value === "string")
+		: [];
+	return include.includes(WEB_SEARCH_SOURCES_INCLUDE)
+		? include
+		: [...include, WEB_SEARCH_SOURCES_INCLUDE];
+}
+
+function addOpenAiWebSearchToPayload(payload) {
+	if (!isRecord(payload)) {
+		return undefined;
+	}
+
+	const tools = Array.isArray(payload.tools) ? payload.tools : [];
+	const sanitizedTools = sanitizeTools(tools, isNativeOpenAiWebSearchType);
+	const hasNativeWebSearch = sanitizedTools.some((tool) =>
+		isNativeOpenAiWebSearchType(tool.type),
+	);
+
+	if (!hasNativeWebSearch) {
+		sanitizedTools.push({ type: "web_search" });
+	}
+
+	return {
+		...payload,
+		tools: sanitizedTools,
+		include: includeWebSearchSources(payload),
+	};
+}
+
+function addAnthropicWebSearchToPayload(payload) {
+	if (!isRecord(payload)) {
+		return undefined;
+	}
+
+	const tools = Array.isArray(payload.tools) ? payload.tools : [];
+	const sanitizedTools = sanitizeTools(tools, isNativeAnthropicWebSearchType);
+	const hasNativeWebSearch = sanitizedTools.some((tool) =>
+		isNativeAnthropicWebSearchType(tool.type),
+	);
+
+	if (!hasNativeWebSearch) {
+		sanitizedTools.push({
+			type: ANTHROPIC_WEB_SEARCH_TYPE,
+			name: "web_search",
+			max_uses: ANTHROPIC_WEB_SEARCH_MAX_USES,
+		});
+	}
+
+	return {
+		...payload,
+		tools: sanitizedTools,
+	};
+}
+
+const OPENAI_WEB_SEARCH_SECTION = `
+## Web Search
+
+The native web_search tool is available in this session.
+Use web_search when the user asks for current or online information.
+Prefer web_search over guessing when freshness matters.
+`;
 
 const _originalFetch = globalThis.fetch;
 globalThis.fetch = async (input, init = {}) => {
@@ -40,6 +144,25 @@ globalThis.fetch = async (input, init = {}) => {
 };
 
 export default function (pi) {
+	pi.on("before_provider_request", (event, ctx) => {
+		if (isUberOpenAiResponses(ctx)) {
+			return addOpenAiWebSearchToPayload(event.payload);
+		}
+		if (isUberAnthropicMessages(ctx)) {
+			return addAnthropicWebSearchToPayload(event.payload);
+		}
+		return undefined;
+	});
+
+	pi.on("before_agent_start", (event, ctx) => {
+		if (!isUberOpenAiResponses(ctx) && !isUberAnthropicMessages(ctx)) {
+			return undefined;
+		}
+		return {
+			systemPrompt: `${event.systemPrompt}\n${OPENAI_WEB_SEARCH_SECTION}`,
+		};
+	});
+
 	pi.registerProvider("anthropic", {
 		baseUrl: GATEWAY,
 		apiKey: "!usso -ussh genai-api -print",
