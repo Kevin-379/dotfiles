@@ -15,8 +15,8 @@
 	1. `echo /opt/homebrew/bin/fish | sudo tee -a /etc/shells`
 	2. `chsh -s /opt/homebrew/bin/fish`
 10. Clone dotfiles and run install script
-	1. `git clone <remote-url> ~/dotfiles`
-	2. `bash ~/dotfiles/install.sh`
+	1. `git clone <remote-url> ~/Personal/dotfiles`
+	2. `bash ~/Personal/dotfiles/install.sh`
 11. Install fisher plugins
 	1. `fish -c 'fisher update'`
 12. Install Spotify

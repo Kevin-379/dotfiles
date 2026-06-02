@@ -21,7 +21,7 @@ Optimize for fewest review iterations: collect every must-fix issue in one pass.
 the first finding.
 
 1. Inspect changed Go production and test code once; build the file/line map for comments.
-2. Load and use `/home/user/.pi/agent/skills/verify` for 100% new-line coverage.
+2. Load and use `~/.agents/skills/verify` for 100% new-line coverage.
 3. Run cheap mechanical scans: multiline readability, semantic naming, and mock chains.
 4. Review tests for complete assertions, table-driven coverage, and explicit mock counts.
 5. Review semantic structure: parse-don't-verify first, then top-down file organization.
@@ -70,9 +70,10 @@ Must-fix when:
 - multiple field-by-field assertions should be one full struct/response assertion
 - similar cases should be table-driven but are split into repetitive tests
 - mock expectations omit explicit `.With`/`.When` or `.Times`/`.MaxTimes`
+- tests or subtests omit `t.Parallel()`
 - expected values are computed in a way that obscures the intended output
 
-Prefer hardcoded expected structs and clear table cases.
+Prefer hardcoded expected structs and clear table cases. All tests and subtests should call `t.Parallel()`.
 
 ### Parse, don't verify
 

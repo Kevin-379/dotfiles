@@ -17,7 +17,7 @@
 
 ## 2. MCP Usage
 
-Use skill file `~/.pi/agent/skills/mcp-usage/SKILL.md` for MCP rules, discovery, schema inspection, and `aifx mcp` commands.
+Use skill file `~/.agents/skills/mcp-usage/SKILL.md` for MCP rules, discovery, schema inspection, and `aifx mcp` commands.
 
 ## 3. Coding Style
 

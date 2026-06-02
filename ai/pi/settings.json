@@ -10,7 +10,7 @@
     "npm:pi-mcp-adapter",
     "npm:vim-motions-pi",
     "npm:@plannotator/pi-extension",
-    "/home/user/pi-powerline-footer",
+    "/Users/skevin/Personal/pi-powerline-footer",
     "npm:pi-context"
   ],
   "powerline": {

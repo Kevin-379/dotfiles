@@ -33,7 +33,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/skevin/.local/bin/utrim-bash hook"
+            "command": "~/.local/bin/utrim-bash hook"
           }
         ]
       }
