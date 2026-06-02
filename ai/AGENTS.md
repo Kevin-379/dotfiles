@@ -17,33 +17,7 @@
 
 ## 2. MCP Usage
 
-Use `mcp({})` for `engwiki` and `t3` only.
-
-- Status: `mcp({ })`
-- Search tools: `mcp({ search: "confluence page" })`
-- Schema: `mcp({ describe: "engwiki_confluence_search" })`
-- Call: `mcp({ tool: "engwiki_confluence_search", args: '{"query":"bazel"}' })`
-
-Use `aifx mcp call omni-mcp` for other Uber MCPs:
-
-```bash
-aifx mcp call omni-mcp discover_tools --args '{"server_name":"usearch-backend"}'
-aifx mcp call omni-mcp get_tool_schema --args '{"server_name":"usearch-backend","tool_name":"usearchbackend_searchv2"}'
-aifx mcp call omni-mcp invoke_tool --args '{"server":"usearch-backend","tool":"usearchbackend_searchv2","arguments":{"query":"bazel"}}'
-```
-
-Rules:
-- Parallelize independent calls.
-- Save large outputs with `-o <file>`.
-- Do not guess server/tool names.
-- Check schema for time formats.
-
-Shell alternative for non-`engwiki`/`t3` MCP:
-
-```bash
-aifx mcp call <server> <tool> --args '<json>' -o <output-file>
-aifx mcp call <server> --list-tools
-```
+Use skill file `~/.pi/agent/skills/mcp-usage/SKILL.md` for MCP rules, discovery, schema inspection, and `aifx mcp` commands.
 
 ## 3. Coding Style
 
