@@ -44,6 +44,7 @@ linkto "ai/pi/extensions/utrim-bash.ts"        ".pi/agent/extensions/utrim-bash.
 linkto "ai/pi/extensions/whimsical.ts"         ".pi/agent/extensions/whimsical.ts"
 linkto "ai/pi/skills/mcp-usage/SKILL.md"      ".agents/skills/mcp-usage/SKILL.md"
 linkto "ai/pi/skills/kevin-go-conventions-reviewer/SKILL.md" ".agents/skills/kevin-go-conventions-reviewer/SKILL.md"
+linkto "ai/pi/skills/subagents"              ".agents/skills/subagents"
 link ".tmux.conf"
 link ".gitconfig"
 

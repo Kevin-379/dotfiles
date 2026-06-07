@@ -11,7 +11,10 @@
     "npm:vim-motions-pi",
     "npm:@plannotator/pi-extension",
     "/Users/skevin/Personal/pi-powerline-footer",
-    "npm:pi-context"
+    "npm:pi-context",
+    "npm:pi-hermes-memory",
+    "npm:pi-taskflow",
+    "npm:pi-until-done"
   ],
   "powerline": {
     "preset": "custom",

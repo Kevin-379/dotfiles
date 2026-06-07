@@ -32,6 +32,7 @@ git clone <skill-repo> ~/.agents/skills/<skill-name>
 - session-restore
 - session-save
 - subagent-driven-development
+- subagents
 - systematic-debugging
 - tdd
 - test-driven-development
@@ -47,6 +48,9 @@ Add these in pi's settings (or `~/.pi/agent/settings.json` under `"packages"`):
 
 - **`npm:pi-mcp-adapter`** — MCP proxy that exposes `engwiki`, `t3`, and `omni-mcp` through pi's `mcp({})` tool
 - **`npm:vim-motions-pi`** — vim keybindings in the pi TUI
+- **`npm:pi-hermes-memory`** — persistent memory, session search, and reusable skill learning
+- **`npm:pi-taskflow`** — reusable DAG taskflows exposed as `/tf:<name>` commands
+- **`npm:pi-until-done`** — autonomous `/until-done` goal loop with verification/judge gates
 
 ## Pi extensions
 
