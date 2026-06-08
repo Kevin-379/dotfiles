@@ -10,7 +10,7 @@
     "npm:pi-mcp-adapter",
     "npm:vim-motions-pi",
     "npm:@plannotator/pi-extension",
-    "/Users/skevin/Personal/pi-powerline-footer",
+    "~/Personal/pi-powerline-footer",
     "npm:pi-context",
     "npm:pi-hermes-memory",
     "npm:pi-taskflow",
