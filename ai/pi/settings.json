@@ -21,6 +21,9 @@
     "fixedEditor": true,
     "mouseScroll": true
   },
+  "powerlineShortcuts": {
+    "jumpChatBottom": "ctrl+alt+g"
+  },
   "startupModel": {
     "model": "openai/gpt-5.5",
     "thinkingLevel": "medium"
