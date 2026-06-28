@@ -28,6 +28,8 @@ Use skill file `~/.agents/skills/mcp-usage/SKILL.md` for MCP rules, discovery, s
 ## 4. Testing
 
 - Tests clear, minimal, complete.
+- Prefer extending an existing test when behavior overlap is strong; add assertions there before creating a new case.
+- Create new tests only when scenario, setup, or expected behavior is distinct.
 - Assert entire structs, not individual fields.
 - Hardcode expected values.
 

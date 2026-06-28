@@ -15,7 +15,7 @@ Use `mcp({})` for `engwiki` and `t3` only.
 Use direct `aifx mcp` commands for other Uber MCPs:
 
 ```bash
-# Search featured MCP servers first; use --all only if needed
+# Search featured MCP servers first; use --all only if needed, it will take a long time to run
 aifx mcp search <keyword>
 aifx mcp search <keyword> --all
 
