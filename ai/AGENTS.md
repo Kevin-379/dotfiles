@@ -14,6 +14,7 @@
 - Match existing style.
 - Remove only imports/vars/functions made unused by your changes.
 - Define success criteria and verify. For multi-step work, give brief plan with checks.
+- After completing any task in Go / Java / iOS monorepo, use `verify` skill.
 
 ## 2. MCP Usage
 
