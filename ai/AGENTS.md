@@ -50,7 +50,4 @@ Use skill file `~/.agents/skills/mcp-usage/SKILL.md` for MCP rules, discovery, s
 
 - Prefer `bin/coverage /path/to/folder` over `bazel test`.
 - Always use `bin/gazelle`, not gazelle.
-- Prefer table-driven tests for similar cases.
-- Use `assert`; use `require` only to prevent nil-deref/panic.
-- Mocks must use `.With` or `.When` and `.Times`.
-- Test names: `should_return_<value>_when_<condition>`.
+- See ~/.agents/skills/kevin-go-code-writer.`
