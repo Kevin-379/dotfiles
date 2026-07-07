@@ -24,7 +24,9 @@ function notify(message: string) {
 }
 
 export default function (pi: ExtensionAPI) {
-	pi.on("agent_end", async () => {
+	pi.on("agent_end", async (_event, ctx) => {
+		if (ctx.mode !== "tui") return;
+
 		notify(MESSAGE);
 	});
 }
