@@ -5,7 +5,7 @@
     "~/.local",
     "--registry=https://registry.npmjs.org"
   ],
-  "lastChangelogVersion": "0.80.1",
+  "lastChangelogVersion": "0.80.3",
   "defaultProvider": "openai",
   "defaultModel": "gpt-5.5",
   "steeringMode": "all",
