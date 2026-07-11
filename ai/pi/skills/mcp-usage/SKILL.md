@@ -1,18 +1,17 @@
 ---
 name: mcp-usage
-description: Use when calling MCP tools, discovering MCP servers, inspecting schemas, or deciding between built-in mcp tools and aifx mcp commands.
+description: Use when calling MCP tools, discovering MCP servers, inspecting schemas, or deciding which MCP workflow to use.
 ---
 
 # MCP Usage
 
-Use `mcp({})` for `engwiki` and `t3` only.
+Choose MCP workflow by domain:
 
-- Status: `mcp({ })`
-- Search tools: `mcp({ search: "confluence page" })`
-- Schema: `mcp({ describe: "engwiki_confluence_search" })`
-- Call: `mcp({ tool: "engwiki_confluence_search", args: '{"query":"bazel"}' })`
+- **T3 / Jira:** See `~/agent-marketplace/claude-code/plugins/domain/saas-skills/t3-jira-skills`.
+- **EngWiki / Atlassian / Confluence:** See `~/agent-marketplace/claude-code/plugins/domain/saas-skills/engwiki-skills`.
+- **All others:** See `~/agent-marketplace/claude-code/plugins/core/dev-workflow/code-mode`.
 
-Use direct `aifx mcp` commands for other Uber MCPs:
+Use `aifx mcp` commands for discovery and calls:
 
 ```bash
 # Search featured MCP servers first; use --all only if needed, it will take a long time to run

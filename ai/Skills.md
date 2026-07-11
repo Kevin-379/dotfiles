@@ -18,29 +18,30 @@ git clone <skill-repo> ~/.agents/skills/<skill-name>
 ## Installed skills
 
 - brainstorming
+- bujo
 - caveman
 - checkpoint
-- dispatching-parallel-agents
-- executing-plans
-- finishing-a-development-branch
-- grill-me
+- code-review
+- grilling
 - grill-with-docs
-- improve-codebase-architecture
+- handoff
+- kevin-go-code-writer
+- kevin-go-conventions-reviewer
+- mcp-usage
 - receiving-code-review
 - requesting-code-review
 - session-list
 - session-restore
 - session-save
-- subagent-driven-development
 - subagents
 - systematic-debugging
 - tdd
-- test-driven-development
-- using-git-worktrees
+- uber-research
 - verification-before-completion
+- verify
+- wayfinder
+- writing-great-skills
 - writing-plans
-- writing-skills
-- zoom-out
 
 ## Pi packages
 
