@@ -10,7 +10,7 @@ const GATEWAY_V1 = `${GATEWAY}/v1`;
 const GATEWAY_HOST = "genai-api.uberinternal.com";
 const HEADERS = { "OpenAI-Organization": ORG_ID };
 const WEB_SEARCH_SOURCES_INCLUDE = "web_search_call.action.sources";
-const ANTHROPIC_WEB_SEARCH_TYPE = "web_search_20260209";
+const ANTHROPIC_WEB_SEARCH_TYPE = "web_search_20250305";
 const ANTHROPIC_WEB_SEARCH_MAX_USES = 5;
 
 function isRecord(value) {
