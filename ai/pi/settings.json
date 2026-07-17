@@ -5,7 +5,7 @@
     "~/.local",
     "--registry=https://registry.npmjs.org"
   ],
-  "lastChangelogVersion": "0.80.3",
+  "lastChangelogVersion": "0.80.6",
   "defaultProvider": "openai",
   "defaultModel": "gpt-5.6-terra",
   "steeringMode": "all",
@@ -13,7 +13,6 @@
   "quietStartup": true,
   "packages": [
     "npm:pi-token-speed",
-    "npm:pi-mcp-adapter",
     "npm:vim-motions-pi",
     "npm:@plannotator/pi-extension",
     "~/Personal/pi-powerline-footer",
