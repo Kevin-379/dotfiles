@@ -112,6 +112,7 @@ const OPENAI_WEB_SEARCH_SECTION = `
 The native web_search tool is available in this session.
 Use web_search when the user asks for current or online information.
 Prefer web_search over guessing when freshness matters.
+When you use web_search, include a concise summary of searches performed in your response.
 `;
 
 const _originalFetch = globalThis.fetch;
