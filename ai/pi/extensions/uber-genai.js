@@ -174,6 +174,9 @@ export default function (pi) {
 				name: "Claude Opus 4.6",
 				api: "anthropic-messages",
 				reasoning: true,
+				compat: {
+					forceAdaptiveThinking: true,
+				},
 				thinkingLevelMap: {
 					minimal: null,
 					xhigh: "max",
@@ -188,6 +191,9 @@ export default function (pi) {
 				name: "Claude Opus 4.8",
 				api: "anthropic-messages",
 				reasoning: true,
+				compat: {
+					forceAdaptiveThinking: true,
+				},
 				thinkingLevelMap: {
 					minimal: null,
 					xhigh: "xhigh",
@@ -202,6 +208,9 @@ export default function (pi) {
 				name: "Claude Sonnet 5",
 				api: "anthropic-messages",
 				reasoning: true,
+				compat: {
+					forceAdaptiveThinking: true,
+				},
 				thinkingLevelMap: {
 					minimal: null,
 					xhigh: "xhigh",
@@ -216,6 +225,9 @@ export default function (pi) {
 				name: "Claude Sonnet 4.6",
 				api: "anthropic-messages",
 				reasoning: true,
+				compat: {
+					forceAdaptiveThinking: true,
+				},
 				thinkingLevelMap: {
 					minimal: null,
 				},
