@@ -204,6 +204,40 @@ export default function (pi) {
 				maxTokens: 128000,
 			},
 			{
+				id: "claude-opus-5",
+				name: "Claude Opus 5",
+				api: "anthropic-messages",
+				reasoning: true,
+				compat: {
+					forceAdaptiveThinking: true,
+				},
+				thinkingLevelMap: {
+					minimal: null,
+					xhigh: "xhigh",
+				},
+				input: ["text", "image"],
+				cost: { input: 5, output: 25, cacheRead: 0.5, cacheWrite: 6.25 },
+				contextWindow: 1000000,
+				maxTokens: 128000,
+			},
+			{
+				id: "claude-fable-5",
+				name: "Claude Fable 5",
+				api: "anthropic-messages",
+				reasoning: true,
+				compat: {
+					forceAdaptiveThinking: true,
+				},
+				thinkingLevelMap: {
+					minimal: null,
+					xhigh: "xhigh",
+				},
+				input: ["text", "image"],
+				cost: { input: 10, output: 50, cacheRead: 1, cacheWrite: 12.5 },
+				contextWindow: 1000000,
+				maxTokens: 128000,
+			},
+			{
 				id: "claude-sonnet-5",
 				name: "Claude Sonnet 5",
 				api: "anthropic-messages",
@@ -235,6 +269,33 @@ export default function (pi) {
 				cost: { input: 3, output: 15, cacheRead: 0.3, cacheWrite: 3.75 },
 				contextWindow: 1000000,
 				maxTokens: 64000,
+			},
+		],
+	});
+
+	pi.registerProvider("fireworks", {
+		baseUrl: GATEWAY_V1,
+		apiKey: "!usso -ussh genai-api -print",
+		headers: HEADERS,
+		api: "openai-completions",
+		models: [
+			{
+				id: "kimi-k3",
+				name: "Kimi K3",
+				reasoning: true,
+				thinkingLevelMap: {
+					off: "none",
+					minimal: "low",
+					low: "low",
+					medium: "high",
+					high: "high",
+					xhigh: "max",
+					max: "max",
+				},
+				input: ["text", "image"],
+				cost: { input: 3, output: 15, cacheRead: 0.3, cacheWrite: 0 },
+				contextWindow: 1048576,
+				maxTokens: 131072,
 			},
 		],
 	});
