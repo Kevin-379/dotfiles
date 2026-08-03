@@ -7,7 +7,7 @@ description: Use when calling MCP tools, discovering MCP servers, inspecting sch
 
 Choose MCP workflow by domain:
 
-- **T3 / Jira:** See `~/agent-marketplace/claude-code/plugins/domain/saas-skills/t3-jira-skills`.
+- **T3 / Jira:** See `~/agent-marketplace/claude-code/plugins/core/dev-workflow/jira-tools`.
 - **EngWiki / Atlassian / Confluence:** See `~/agent-marketplace/claude-code/plugins/domain/saas-skills/engwiki-skills`.
 - **All others:** See `~/agent-marketplace/claude-code/plugins/core/dev-workflow/code-mode`.
 - For google related fetching, see `~/agent-marketplace/claude-code/plugins/core/productivity/google-workspace/`.
