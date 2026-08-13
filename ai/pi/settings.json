@@ -1,13 +1,11 @@
 {
   "npmCommand": [
     "npm",
-    "--prefix",
-    "~/.local",
     "--registry=https://registry.npmjs.org"
   ],
-  "lastChangelogVersion": "0.80.10",
+  "lastChangelogVersion": "0.83.0",
   "defaultProvider": "openai",
-  "defaultModel": "gpt-5.6-terra",
+  "defaultModel": "gpt-5.6-sol",
   "steeringMode": "all",
   "followUpMode": "one-at-a-time",
   "quietStartup": true,
@@ -19,7 +17,7 @@
     "npm:pi-context",
     "npm:pi-hermes-memory",
     "npm:pi-taskflow",
-    "npm:pi-until-done"
+    "git:github.com/Helmi/pi-event-monitor"
   ],
   "powerline": {
     "preset": "custom",
@@ -43,5 +41,11 @@
     "vision": "openai/gpt-5.6-terra",
     "reasoner": "openai/gpt-5.6-sol"
   },
-  "theme": "dark"
+  "theme": "dark",
+  "enableInstallTelemetry": false,
+  "taskflow": {
+    "piChild": {
+      "resourceProfile": "inherit"
+    }
+  }
 }
