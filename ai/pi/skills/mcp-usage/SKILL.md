@@ -7,10 +7,10 @@ description: Use when calling MCP tools, discovering MCP servers, inspecting sch
 
 Choose MCP workflow by domain:
 
-- **T3 / Jira:** See `~/agent-marketplace/claude-code/plugins/core/dev-workflow/jira-tools`.
-- **EngWiki / Atlassian / Confluence:** See `~/agent-marketplace/claude-code/plugins/domain/saas-skills/engwiki-skills`.
-- **All others:** See `~/agent-marketplace/claude-code/plugins/core/dev-workflow/code-mode`.
-- For google related fetching, see `~/agent-marketplace/claude-code/plugins/core/productivity/google-workspace/`.
+- **T3 / Jira:** Read `~/agent-marketplace/claude-code/plugins/core/dev-workflow/jira-tools/skills/jira-tools/SKILL.md`.
+- **EngWiki / Atlassian / Confluence:** See `~/agent-marketplace/claude-code/plugins/domain/saas-skills/engwiki-skills/` (multiple skills; choose the relevant one under `skills/`).
+- **All others:** See `~/agent-marketplace/claude-code/plugins/core/dev-workflow/code-mode/` (multiple skills; use `skills/mcp-call/SKILL.md` for generic MCP calls).
+- For Google-related fetching, see `~/agent-marketplace/claude-code/plugins/core/productivity/google-workspace/` (multiple skills; choose the relevant one under `skills/`).
 
 Use `aifx mcp` commands for discovery and calls:
 

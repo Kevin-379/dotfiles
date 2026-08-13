@@ -56,3 +56,9 @@ Use skill file `~/.agents/skills/mcp-usage/SKILL.md` for MCP rules, discovery, s
 ## 8. Taskflow
 
 - Don't provide a top level budget, it serializes everything
+
+## 9. Skills
+
+- Most skills live in `~/agent-marketplace` (marketplace plugins) or `~/.agents/skills` (personal).
+- `~/.pi/agent/skills/` is symlinks into those two; resolve with `realpath` to get the real dir.
+- Run a skill's scripts from its resolved dir — they import `shared/` relatively.
