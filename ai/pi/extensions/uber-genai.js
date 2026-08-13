@@ -168,41 +168,9 @@ export default function (pi) {
 		baseUrl: GATEWAY,
 		apiKey: "!usso -ussh genai-api -print",
 		headers: HEADERS,
+		// Claude models are capped at 400k instead of their native 1M: autocompaction
+		// fires at contextWindow - reserveTokens, and quality degrades well before 1M.
 		models: [
-			{
-				id: "claude-opus-4-6",
-				name: "Claude Opus 4.6",
-				api: "anthropic-messages",
-				reasoning: true,
-				compat: {
-					forceAdaptiveThinking: true,
-				},
-				thinkingLevelMap: {
-					minimal: null,
-					xhigh: "max",
-				},
-				input: ["text", "image"],
-				cost: { input: 5, output: 25, cacheRead: 0.5, cacheWrite: 6.25 },
-				contextWindow: 1000000,
-				maxTokens: 128000,
-			},
-			{
-				id: "claude-opus-4-8",
-				name: "Claude Opus 4.8",
-				api: "anthropic-messages",
-				reasoning: true,
-				compat: {
-					forceAdaptiveThinking: true,
-				},
-				thinkingLevelMap: {
-					minimal: null,
-					xhigh: "xhigh",
-				},
-				input: ["text", "image"],
-				cost: { input: 5, output: 25, cacheRead: 0.5, cacheWrite: 6.25 },
-				contextWindow: 1000000,
-				maxTokens: 128000,
-			},
 			{
 				id: "claude-opus-5",
 				name: "Claude Opus 5",
@@ -217,7 +185,7 @@ export default function (pi) {
 				},
 				input: ["text", "image"],
 				cost: { input: 5, output: 25, cacheRead: 0.5, cacheWrite: 6.25 },
-				contextWindow: 1000000,
+				contextWindow: 400000,
 				maxTokens: 128000,
 			},
 			{
@@ -234,7 +202,7 @@ export default function (pi) {
 				},
 				input: ["text", "image"],
 				cost: { input: 10, output: 50, cacheRead: 1, cacheWrite: 12.5 },
-				contextWindow: 1000000,
+				contextWindow: 400000,
 				maxTokens: 128000,
 			},
 			{
@@ -251,24 +219,8 @@ export default function (pi) {
 				},
 				input: ["text", "image"],
 				cost: { input: 2, output: 10, cacheRead: 0.2, cacheWrite: 2.5 },
-				contextWindow: 1000000,
+				contextWindow: 400000,
 				maxTokens: 128000,
-			},
-			{
-				id: "claude-sonnet-4-6",
-				name: "Claude Sonnet 4.6",
-				api: "anthropic-messages",
-				reasoning: true,
-				compat: {
-					forceAdaptiveThinking: true,
-				},
-				thinkingLevelMap: {
-					minimal: null,
-				},
-				input: ["text", "image"],
-				cost: { input: 3, output: 15, cacheRead: 0.3, cacheWrite: 3.75 },
-				contextWindow: 1000000,
-				maxTokens: 64000,
 			},
 		],
 	});
@@ -331,7 +283,7 @@ export default function (pi) {
 					xhigh: "xhigh",
 				},
 				input: ["text", "image"],
-				cost: { input: 2.5, output: 15, cacheRead: 0.25, cacheWrite: 3.125 },
+				cost: { input: 2, output: 12, cacheRead: 0.2, cacheWrite: 2.5 },
 				contextWindow: 272000,
 				maxTokens: 128000,
 			},
@@ -346,7 +298,7 @@ export default function (pi) {
 					xhigh: "xhigh",
 				},
 				input: ["text", "image"],
-				cost: { input: 1, output: 6, cacheRead: 0.1, cacheWrite: 1.25 },
+				cost: { input: 0.2, output: 1.2, cacheRead: 0.02, cacheWrite: 0.25 },
 				contextWindow: 272000,
 				maxTokens: 128000,
 			},
