@@ -62,3 +62,8 @@ Use skill file `~/.agents/skills/mcp-usage/SKILL.md` for MCP rules, discovery, s
 - Most skills live in `~/agent-marketplace` (marketplace plugins) or `~/.agents/skills` (personal).
 - `~/.pi/agent/skills/` is symlinks into those two; resolve with `realpath` to get the real dir.
 - Run a skill's scripts from its resolved dir — they import `shared/` relatively.
+
+## 10. Scribe
+
+Scribe is local knowledge vault for durable session notes, specs, and agent skills.
+For any Scribe vault/session/spec work, read `~/.agents/skills/scribe-use/SKILL.md` first. It defines required logging, vault safety, and data-classification rules.
