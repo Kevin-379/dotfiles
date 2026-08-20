@@ -66,4 +66,4 @@ Use skill file `~/.agents/skills/mcp-usage/SKILL.md` for MCP rules, discovery, s
 ## 10. Scribe
 
 Scribe is local knowledge vault for durable session notes, specs, and agent skills.
-For any Scribe vault/session/spec work, read `~/.agents/skills/scribe-use/SKILL.md` first. It defines required logging, vault safety, and data-classification rules.
+For any Scribe vault/session/spec work, read `~/.pi/agent/skills/scribe-use/SKILL.md` first. It defines required logging, vault safety, and data-classification rules.
