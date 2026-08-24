@@ -22,7 +22,8 @@
   "powerline": {
     "preset": "custom",
     "fixedEditor": true,
-    "mouseScroll": true
+    "mouseScroll": true,
+    "placement": "below"
   },
   "powerlineShortcuts": {
     "jumpChatBottom": "ctrl+alt+g"
@@ -50,5 +51,8 @@
   },
   "branchSummaryExtension": {
     "interval": 5
-  }
+  },
+  "showLastPrompt": false,
+  "tuiMode": "fullscreen",
+  "fullscreenExitOutput": "resume-hint"
 }
