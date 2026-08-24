@@ -1,0 +1,7 @@
+{
+  "llmModelOverride": "openai/gpt-5.6-luna",
+  "llmThinkingOverride": "low",
+  "childExtensionPaths": [
+    "/home/user/.pi/agent/extensions/uber-genai.js"
+  ]
+}
