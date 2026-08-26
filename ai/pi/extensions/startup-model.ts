@@ -22,6 +22,17 @@ interface StartupModelSetting extends StartupModelConfig {
     source: Scope;
 }
 
+interface RuntimeState {
+    pendingNewSessionModel?: StartupModelConfig;
+}
+
+const RUNTIME_STATE_KEY = "__piStartupModelRuntimeState";
+
+function getRuntimeState(): RuntimeState {
+    const globalState = globalThis as typeof globalThis & { [RUNTIME_STATE_KEY]?: RuntimeState };
+    return (globalState[RUNTIME_STATE_KEY] ??= {});
+}
+
 const tokenize = (rawArgs?: string) => (rawArgs ?? "").trim().split(/\s+/).filter(Boolean);
 
 function getSettingsPath(cwd: string, scope: Scope): string {
@@ -82,10 +93,7 @@ function parseModelSpec(spec: string): { provider: string; modelId: string } | u
     return { provider: provider.trim(), modelId };
 }
 
-async function applyStartupModel(pi: ExtensionAPI, ctx: ExtensionContext): Promise<void> {
-    const setting = await getStartupModelSetting(ctx.cwd);
-    if (!setting) return;
-
+async function applyModel(pi: ExtensionAPI, ctx: ExtensionContext, setting: StartupModelConfig): Promise<void> {
     const target = parseModelSpec(setting.model);
     if (!target) {
         ctx.ui.notify(`Invalid startupModel '${setting.model}'. Use provider/model.`, "warning");
@@ -104,6 +112,11 @@ async function applyStartupModel(pi: ExtensionAPI, ctx: ExtensionContext): Promi
     }
 
     if (setting.thinkingLevel) pi.setThinkingLevel(setting.thinkingLevel as ThinkingLevel);
+}
+
+async function applyStartupModel(pi: ExtensionAPI, ctx: ExtensionContext): Promise<void> {
+    const setting = await getStartupModelSetting(ctx.cwd);
+    if (setting) await applyModel(pi, ctx, setting);
 }
 
 function parseScope(rawArgs?: string, defaultScope: Scope = "global"): Scope {
@@ -127,7 +140,25 @@ function parseShowOrClear(rawArgs?: string): { scope: Scope; action: "show" | "c
 }
 
 export default function startupModelExtension(pi: ExtensionAPI) {
-    pi.on("session_start", async (_event, ctx) => {
+    pi.on("session_shutdown", (event, ctx) => {
+        if (event.reason !== "new" || !ctx.model) return;
+
+        getRuntimeState().pendingNewSessionModel = {
+            model: `${ctx.model.provider}/${ctx.model.id}`,
+            thinkingLevel: pi.getThinkingLevel(),
+        };
+    });
+
+    pi.on("session_start", async (event, ctx) => {
+        if (event.reason === "reload") return;
+
+        if (event.reason === "new") {
+            const state = getRuntimeState();
+            const setting = state.pendingNewSessionModel;
+            delete state.pendingNewSessionModel;
+            if (setting) return applyModel(pi, ctx, setting);
+        }
+
         await applyStartupModel(pi, ctx);
     });
 
