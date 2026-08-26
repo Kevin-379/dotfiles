@@ -313,7 +313,7 @@ export default function (pi) {
 					xhigh: "xhigh",
 				},
 				input: ["text", "image"],
-				cost: { input: 5, output: 30, cacheRead: 0.5, cacheWrite: 6.25 },
+				cost: { input: 4, output: 20, cacheRead: 0.4, cacheWrite: 5 },
 				contextWindow: 272000,
 				maxTokens: 128000,
 			},
