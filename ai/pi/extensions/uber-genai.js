@@ -206,6 +206,23 @@ export default function (pi) {
 				maxTokens: 128000,
 			},
 			{
+				id: "claude-fable-5-1",
+				name: "Claude Fable 5.1",
+				api: "anthropic-messages",
+				reasoning: true,
+				compat: {
+					forceAdaptiveThinking: true,
+				},
+				thinkingLevelMap: {
+					minimal: null,
+					xhigh: "xhigh",
+				},
+				input: ["text", "image"],
+				cost: { input: 10, output: 50, cacheRead: 0.25, cacheWrite: 12.5 },
+				contextWindow: 400000,
+				maxTokens: 128000,
+			},
+			{
 				id: "claude-sonnet-5",
 				name: "Claude Sonnet 5",
 				api: "anthropic-messages",
