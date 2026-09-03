@@ -275,21 +275,6 @@ export default function (pi) {
 		headers: HEADERS,
 		models: [
 			{
-				id: "gpt-5.5",
-				name: "GPT-5.5",
-				api: "openai-responses",
-				reasoning: true,
-				thinkingLevelMap: {
-					off: "none",
-					minimal: null,
-					xhigh: "xhigh",
-				},
-				input: ["text", "image"],
-				cost: { input: 5, output: 30, cacheRead: 0.5, cacheWrite: 0 },
-				contextWindow: 272000,
-				maxTokens: 128000,
-			},
-			{
 				id: "gpt-5.6-terra",
 				name: "GPT-5.6 Terra",
 				api: "openai-responses",
@@ -332,16 +317,6 @@ export default function (pi) {
 				input: ["text", "image"],
 				cost: { input: 4, output: 20, cacheRead: 0.4, cacheWrite: 5 },
 				contextWindow: 272000,
-				maxTokens: 128000,
-			},
-			{
-				id: "gpt-5.5-pro",
-				name: "GPT-5.5 Pro",
-				api: "openai-responses",
-				reasoning: true,
-				input: ["text", "image"],
-				cost: { input: 30, output: 180, cacheRead: 0, cacheWrite: 0 },
-				contextWindow: 1050000,
 				maxTokens: 128000,
 			},
 		],

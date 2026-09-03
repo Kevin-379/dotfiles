@@ -54,6 +54,7 @@ const SUSPICIOUS_PATTERNS: { pattern: RegExp; label: string }[] = [
 ];
 
 const LOG_PATH = join(homedir(), ".pi", "agent", "blocked-commands.jsonl");
+const STATE_ENTRY_TYPE = "command-denylist-state";
 
 function log(entry: Record<string, unknown>) {
 	try {
@@ -71,6 +72,49 @@ const APPROVAL_PARAMS = Type.Object({
 
 export default function commandDenylistExtension(pi: ExtensionAPI) {
 	const bashTool = createBashTool(process.cwd());
+	let enabled = true;
+
+	pi.on("session_start", (_event, ctx) => {
+		enabled = true;
+		const entries = ctx.sessionManager.getBranch();
+		for (let index = entries.length - 1; index >= 0; index--) {
+			const entry = entries[index];
+			if (entry.type !== "custom" || entry.customType !== STATE_ENTRY_TYPE) continue;
+
+			const state = entry.data as { enabled?: unknown };
+			if (typeof state.enabled === "boolean") enabled = state.enabled;
+			break;
+		}
+	});
+
+	pi.registerCommand("command-denylist", {
+		description: "Manage deny list for this session: /command-denylist [enable|disable|status]",
+		getArgumentCompletions: (prefix) => {
+			const actions = ["enable", "disable", "status"];
+			const matches = actions.filter((action) => action.startsWith(prefix));
+			return matches.length > 0 ? matches.map((action) => ({ value: action, label: action })) : null;
+		},
+		handler: async (args, ctx) => {
+			const action = args.trim().toLowerCase() || "status";
+			if (action === "status") {
+				ctx.ui.notify(`Command deny list is ${enabled ? "enabled" : "disabled"} for this session.`, "info");
+				return;
+			}
+
+			if (action !== "enable" && action !== "disable") {
+				ctx.ui.notify("Usage: /command-denylist [enable|disable|status]", "warning");
+				return;
+			}
+
+			enabled = action === "enable";
+			pi.appendEntry(STATE_ENTRY_TYPE, { enabled });
+			log({ event: enabled ? "enabled" : "disabled", session: ctx.sessionManager.getSessionId() });
+			ctx.ui.notify(
+				`Command deny list ${enabled ? "enabled" : "disabled"} for this session.`,
+				enabled ? "info" : "warning",
+			);
+		},
+	});
 
 	pi.registerTool({
 		name: "request_command_approval",
@@ -107,7 +151,7 @@ export default function commandDenylistExtension(pi: ExtensionAPI) {
 	});
 
 	pi.on("tool_call", async (event) => {
-		if (!isToolCallEventType("bash", event)) return undefined;
+		if (!enabled || !isToolCallEventType("bash", event)) return undefined;
 		const command = event.input.command;
 
 		const rule = DENY_RULES.find((r) => r.pattern.test(command));
