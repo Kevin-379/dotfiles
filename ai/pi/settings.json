@@ -3,7 +3,7 @@
     "npm",
     "--registry=https://registry.npmjs.org"
   ],
-  "lastChangelogVersion": "0.84.3",
+  "lastChangelogVersion": "0.85.0",
   "defaultProvider": "openai",
   "defaultModel": "gpt-5.6-sol",
   "steeringMode": "all",
