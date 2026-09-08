@@ -17,7 +17,8 @@
     "npm:pi-context",
     "npm:pi-hermes-memory",
     "npm:pi-taskflow",
-    "git:github.com/Helmi/pi-event-monitor"
+    "git:github.com/Helmi/pi-event-monitor",
+    "npm:pi-custom-compaction"
   ],
   "powerline": {
     "preset": "custom",
