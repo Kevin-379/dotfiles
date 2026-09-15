@@ -151,6 +151,7 @@ export default function startupModelExtension(pi: ExtensionAPI) {
 
     pi.on("session_start", async (event, ctx) => {
         if (event.reason === "reload" || event.reason === "resume" || event.reason === "fork") return;
+        if (event.reason === "startup" && ctx.sessionManager.buildSessionContext().messages.length > 0) return;
 
         if (event.reason === "new") {
             const state = getRuntimeState();
