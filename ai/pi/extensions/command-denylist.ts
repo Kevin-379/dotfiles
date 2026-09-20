@@ -23,16 +23,16 @@ interface DenyRule {
 }
 
 const DENY_RULES: DenyRule[] = [
-	{
-		pattern: /\bbazel\s+build\b/,
-		explanation: "bazel build invalidates the bazel cache.",
-		alternative: "Prefer `bin/coverage /path/to/folder` instead.",
-	},
-	{
-		pattern: /\bbazel\s+test\b/,
-		explanation: "bazel test is discouraged here.",
-		alternative: "Prefer `bin/coverage /path/to/folder` instead.",
-	},
+	// {
+	// 	pattern: /\bbazel\s+build\b/,
+	// 	explanation: "bazel build invalidates the bazel cache.",
+	// 	alternative: "Prefer `bin/coverage /path/to/folder` instead.",
+	// },
+	// {
+	// 	pattern: /\bbazel\s+test\b/,
+	// 	explanation: "bazel test is discouraged here.",
+	// 	alternative: "Prefer `bin/coverage /path/to/folder` instead.",
+	// },
 	{
 		pattern: /\bgit\s+push\b/,
 		explanation: "Never push without explicit approval.",

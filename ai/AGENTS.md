@@ -13,7 +13,6 @@
 - Match existing style.
 - Remove only imports/vars/functions made unused by your changes.
 - Define success criteria and verify. For multi-step work, give brief plan with checks.
-- Use `verify` skill / `aifx verify` only right before creating a PR or diff, never as a routine post-task step. Verify finished work with targeted `bin/coverage` / `bazel test` on the touched packages instead.
 
 ## 2. MCP Usage
 
@@ -49,7 +48,6 @@ Use skill file `~/.agents/skills/mcp-usage/SKILL.md` for MCP rules, discovery, s
 
 ## 7. Go Rules
 
-- Prefer `bin/coverage /path/to/folder` over `bazel test`.
 - Always use `bin/gazelle`, not gazelle.
 - See ~/.agents/skills/kevin-go-code-writer.`
 
