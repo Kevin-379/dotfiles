@@ -172,8 +172,8 @@ export default function (pi) {
 		// fires at contextWindow - reserveTokens, and quality degrades well before 1M.
 		models: [
 			{
-				id: "claude-opus-5",
-				name: "Claude Opus 5",
+				id: "claude-opus-5-5",
+				name: "Claude Opus 5.5",
 				api: "anthropic-messages",
 				reasoning: true,
 				compat: {
@@ -184,24 +184,7 @@ export default function (pi) {
 					xhigh: "xhigh",
 				},
 				input: ["text", "image"],
-				cost: { input: 5, output: 25, cacheRead: 0.5, cacheWrite: 6.25 },
-				contextWindow: 400000,
-				maxTokens: 128000,
-			},
-			{
-				id: "claude-fable-5",
-				name: "Claude Fable 5",
-				api: "anthropic-messages",
-				reasoning: true,
-				compat: {
-					forceAdaptiveThinking: true,
-				},
-				thinkingLevelMap: {
-					minimal: null,
-					xhigh: "xhigh",
-				},
-				input: ["text", "image"],
-				cost: { input: 10, output: 50, cacheRead: 1, cacheWrite: 12.5 },
+				cost: { input: 4, output: 20, cacheRead: 0.2, cacheWrite: 5 },
 				contextWindow: 400000,
 				maxTokens: 128000,
 			},
@@ -286,6 +269,36 @@ export default function (pi) {
 				},
 				input: ["text", "image"],
 				cost: { input: 10, output: 50, cacheRead: 1, cacheWrite: 12.5 },
+				contextWindow: 272000,
+				maxTokens: 128000,
+			},
+			{
+				id: "gpt-6-luna",
+				name: "GPT-6 Luna",
+				api: "openai-responses",
+				reasoning: true,
+				thinkingLevelMap: {
+					off: "none",
+					minimal: null,
+					xhigh: "xhigh",
+				},
+				input: ["text", "image"],
+				cost: { input: 0.1, output: 0.5, cacheRead: 0.01, cacheWrite: 0.125 },
+				contextWindow: 272000,
+				maxTokens: 128000,
+			},
+			{
+				id: "gpt-6-sol",
+				name: "GPT-6 Sol",
+				api: "openai-responses",
+				reasoning: true,
+				thinkingLevelMap: {
+					off: "none",
+					minimal: null,
+					xhigh: "xhigh",
+				},
+				input: ["text", "image"],
+				cost: { input: 2, output: 10, cacheRead: 0.2, cacheWrite: 2.5 },
 				contextWindow: 272000,
 				maxTokens: 128000,
 			},
