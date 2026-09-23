@@ -34,6 +34,11 @@ const DENY_RULES: DenyRule[] = [
 	// 	alternative: "Prefer `bin/coverage /path/to/folder` instead.",
 	// },
 	{
+		pattern: /\bbazel\s+coverage\b/,
+		explanation: "bazel coverage is discouraged here.",
+		alternative: "Use `bin/coverage` instead.",
+	},
+	{
 		pattern: /\bgit\s+push\b/,
 		explanation: "Never push without explicit approval.",
 		alternative: "Ask the user to push the branch.",
