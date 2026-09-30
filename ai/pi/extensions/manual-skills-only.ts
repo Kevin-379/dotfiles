@@ -1,6 +1,6 @@
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 
-const AUTOMATIC_SKILLS = new Set(["caveman"]);
+const AUTOMATIC_SKILLS = new Set(["caveman", "ponytail"]);
 
 export default function manualSkillsOnly(pi: ExtensionAPI) {
 	pi.on("before_agent_start", (event) => {

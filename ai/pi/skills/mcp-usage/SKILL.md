@@ -11,6 +11,7 @@ Choose MCP workflow by domain:
 - **EngWiki / Atlassian / Confluence:** See `~/agent-marketplace/claude-code/plugins/domain/saas-skills/engwiki-skills/` (multiple skills; choose the relevant one under `skills/`).
 - **All others:** See `~/agent-marketplace/claude-code/plugins/core/dev-workflow/code-mode/` (multiple skills; use `skills/mcp-call/SKILL.md` for generic MCP calls).
 - For Google-related fetching, see `~/agent-marketplace/claude-code/plugins/core/productivity/google-workspace/` (multiple skills; choose the relevant one under `skills/`).
+- **GitHub PR comments:** Use `~/agent-marketplace/claude-code/plugins/core/dev-workflow/code-inbox-manager/scripts/pr_metadata.py --repo <owner/repo> --pr <N>` (not `gh`).
 
 Use `aifx mcp` commands for discovery and calls:
 

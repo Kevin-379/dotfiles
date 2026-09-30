@@ -4,15 +4,9 @@
 - Keep answers short, direct, concise. I will ask for clarification when needed.
 - Ask questions only when blocked, ambiguity changes outcome, or action is risky.
 
-## 1. Work Style
+## 1. Tool use
 
-- Think before coding. State assumptions when needed. Surface tradeoffs.
-- If unclear, stop, name confusion, ask.
-- Prefer simplest solution. No speculative features, abstractions, config, or impossible-case handling.
-- Touch only required lines. No unrelated refactors/cleanup.
-- Match existing style.
-- Remove only imports/vars/functions made unused by your changes.
-- Define success criteria and verify. For multi-step work, give brief plan with checks.
+- Prefer edit tool use above write tool, python, bash commands, etc.
 
 ## 2. MCP Usage
 
@@ -21,7 +15,6 @@ Use skill file `~/.agents/skills/mcp-usage/SKILL.md` for MCP rules, discovery, s
 ## 3. Coding Style
 
 - Keep code readable and consistent.
-- Order struct fields top-down by significance/logical flow.
 - Format multi-arg calls, method chains, nested structs across multiple lines: one arg/field per line.
 - Doc comments on exported declarations are just `// Name ...` (`// New ...`, `// Gateway ...`). Never restate the name in a sentence.
 - Write a real comment only for a decision made or why something works. No comments on obvious things.
@@ -50,18 +43,15 @@ Use skill file `~/.agents/skills/mcp-usage/SKILL.md` for MCP rules, discovery, s
 
 - Always use `bin/gazelle`, not gazelle.
 - See ~/.agents/skills/kevin-go-code-writer.`
+- Use `ponytail` skill when making incremental edits to existing code.
 
-## 8. Taskflow
-
-- Don't provide a top level budget, it serializes everything
-
-## 9. Skills
+## 8. Skills
 
 - Most skills live in `~/agent-marketplace` (marketplace plugins) or `~/.agents/skills` (personal).
 - `~/.pi/agent/skills/` is symlinks into those two; resolve with `realpath` to get the real dir.
 - Run a skill's scripts from its resolved dir — they import `shared/` relatively.
 
-## 10. Scribe
+## 9. Scribe
 
 Scribe is local knowledge vault for durable session notes, specs, and agent skills.
 For any Scribe vault/session/spec work, read `~/.pi/agent/skills/scribe-use/SKILL.md` first. It defines required logging, vault safety, and data-classification rules.
