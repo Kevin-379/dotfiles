@@ -7,7 +7,7 @@ import type { ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-a
 
 const SUMMARY_TYPE = "branch-summary";
 const MODEL_PROVIDER = "openai";
-const MODEL_ID = "gpt-5.6-luna";
+const MODEL_ID = "gpt-6-luna";
 const DEFAULT_INTERVAL = 5;
 const MAX_MESSAGE_CHARACTERS = 12_000;
 

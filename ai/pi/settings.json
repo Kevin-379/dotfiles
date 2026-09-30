@@ -3,7 +3,7 @@
     "npm",
     "--registry=https://registry.npmjs.org"
   ],
-  "lastChangelogVersion": "0.87.1",
+  "lastChangelogVersion": "0.99.1",
   "defaultProvider": "openai",
   "defaultModel": "gpt-5.6-sol",
   "steeringMode": "all",
@@ -30,18 +30,16 @@
     "jumpChatBottom": "ctrl+alt+g"
   },
   "startupModel": {
-    "model": "openai/gpt-6-sol",
+    "model": "openai/gpt-6.1-sol",
     "thinkingLevel": "medium"
   },
   "defaultThinkingLevel": "medium",
   "enableSkillCommands": true,
   "modelRoles": {
-    "fast": "openai/gpt-5.6-terra",
-    "strong": "openai/gpt-5.6-terra",
-    "thinker": "openai/gpt-5.6-sol",
-    "arbiter": "openai/gpt-5.6-sol",
-    "vision": "openai/gpt-5.6-terra",
-    "reasoner": "openai/gpt-5.6-sol"
+    "builder": "openai/gpt-6.1-sol",
+    "scout": "openai/gpt-6.1-sol",
+    "expert": "anthropic/claude-opus-5-5",
+    "steward": "anthropic/claude-opus-5-5"
   },
   "theme": "dark",
   "enableInstallTelemetry": false,
