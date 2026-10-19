@@ -3,7 +3,7 @@
     "npm",
     "--registry=https://registry.npmjs.org"
   ],
-  "lastChangelogVersion": "1.0.2",
+  "lastChangelogVersion": "1.1.0",
   "defaultProvider": "openai",
   "defaultModel": "gpt-5.6-sol",
   "steeringMode": "all",
@@ -41,7 +41,7 @@
     "expert": "anthropic/claude-opus-5-5",
     "steward": "anthropic/claude-opus-5-5"
   },
-  "theme": "dark",
+  "theme": "system",
   "enableInstallTelemetry": false,
   "taskflow": {
     "piChild": {
