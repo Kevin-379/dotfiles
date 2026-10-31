@@ -12,17 +12,37 @@ const HEADERS = { "OpenAI-Organization": ORG_ID };
 const WEB_SEARCH_SOURCES_INCLUDE = "web_search_call.action.sources";
 const ANTHROPIC_WEB_SEARCH_TYPE = "web_search_20250305";
 const ANTHROPIC_WEB_SEARCH_MAX_USES = 5;
+const MODEL_TARGETS = {
+	sol: { provider: "openai", id: "gpt-6.1-sol" },
+	terra: { provider: "openai", id: "gpt-6.1-terra" },
+	luna: { provider: "openai", id: "gpt-6-luna" },
+	opus: { provider: "anthropic", id: "claude-opus-5-5" },
+};
+const MODEL_ALIASES = {
+	"openai/sol": MODEL_TARGETS.sol,
+	"openai/terra": MODEL_TARGETS.terra,
+	"openai/luna": MODEL_TARGETS.luna,
+	"anthropic/opus": MODEL_TARGETS.opus,
+	"router/coding": MODEL_TARGETS.sol,
+};
 
 function isRecord(value) {
 	return typeof value === "object" && value !== null;
 }
 
+function providerModel(ctx) {
+	const target = MODEL_ALIASES[`${ctx.model?.provider}/${ctx.model?.id}`];
+	return target ? ctx.modelRegistry.find(target.provider, target.id) : ctx.model;
+}
+
 function isUberOpenAiResponses(ctx) {
-	return ctx.model?.provider === "openai" && ctx.model?.api === "openai-responses";
+	const model = providerModel(ctx);
+	return model?.provider === "openai" && model?.api === "openai-responses";
 }
 
 function isUberAnthropicMessages(ctx) {
-	return ctx.model?.provider === "anthropic" && ctx.model?.api === "anthropic-messages";
+	const model = providerModel(ctx);
+	return model?.provider === "anthropic" && model?.api === "anthropic-messages";
 }
 
 function isNativeOpenAiWebSearchType(value) {
@@ -172,7 +192,7 @@ export default function (pi) {
 		// fires at contextWindow - reserveTokens, and quality degrades well before 1M.
 		models: [
 			{
-				id: "claude-opus-5-5",
+				id: MODEL_TARGETS.opus.id,
 				name: "Claude Opus 5.5",
 				api: "anthropic-messages",
 				reasoning: true,
@@ -231,7 +251,7 @@ export default function (pi) {
 		headers: HEADERS,
 		models: [
 			{
-				id: "gpt-6.1-sol",
+				id: MODEL_TARGETS.sol.id,
 				name: "GPT-6.1 Sol",
 				api: "openai-responses",
 				reasoning: true,
@@ -242,6 +262,22 @@ export default function (pi) {
 				},
 				input: ["text", "image"],
 				cost: { input: 2, output: 10, cacheRead: 0.1, cacheWrite: 2.5 },
+				contextWindow: 272000,
+				maxTokens: 128000,
+			},
+			{
+				id: MODEL_TARGETS.terra.id,
+				name: "GPT-6.1 Terra",
+				api: "openai-responses",
+				reasoning: true,
+				thinkingLevelMap: {
+					off: "none",
+					minimal: null,
+					xhigh: "xhigh",
+					max: "max",
+				},
+				input: ["text", "image"],
+				cost: { input: 1, output: 5, cacheRead: 0.05, cacheWrite: 1.25 },
 				contextWindow: 272000,
 				maxTokens: 128000,
 			},
@@ -261,7 +297,7 @@ export default function (pi) {
 				maxTokens: 128000,
 			},
 			{
-				id: "gpt-6-luna",
+				id: MODEL_TARGETS.luna.id,
 				name: "GPT-6 Luna",
 				api: "openai-responses",
 				reasoning: true,
@@ -277,4 +313,21 @@ export default function (pi) {
 			},
 		],
 	});
+
+	for (const [alias, target] of Object.entries(MODEL_ALIASES)) {
+		const [provider, id] = alias.split("/");
+		pi.registerVirtualModel({
+			provider,
+			id,
+			name: id,
+			thinkingLevels: ["off", "minimal", "low", "medium", "high", "xhigh", "max"],
+			route(request, ctx) {
+				const model = ctx.modelRegistry.find(target.provider, target.id);
+				if (!model) {
+					throw new Error(`Alias ${alias}: model ${target.provider}/${target.id} not found`);
+				}
+				return { model, thinkingLevel: request.thinkingLevel };
+			},
+		});
+	}
 }

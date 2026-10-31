@@ -3,9 +3,9 @@
     "npm",
     "--registry=https://registry.npmjs.org"
   ],
-  "lastChangelogVersion": "1.1.0",
+  "lastChangelogVersion": "1.4.0",
   "defaultProvider": "openai",
-  "defaultModel": "gpt-5.6-sol",
+  "defaultModel": "sol",
   "steeringMode": "all",
   "followUpMode": "one-at-a-time",
   "quietStartup": true,
@@ -30,16 +30,16 @@
     "jumpChatBottom": "ctrl+alt+g"
   },
   "startupModel": {
-    "model": "openai/gpt-6.1-sol",
+    "model": "openai/sol",
     "thinkingLevel": "medium"
   },
   "defaultThinkingLevel": "medium",
   "enableSkillCommands": true,
   "modelRoles": {
-    "builder": "openai/gpt-6.1-sol",
-    "scout": "openai/gpt-6.1-sol",
-    "expert": "anthropic/claude-opus-5-5",
-    "steward": "anthropic/claude-opus-5-5"
+    "builder": "router/coding",
+    "scout": "openai/sol",
+    "expert": "anthropic/opus",
+    "steward": "anthropic/opus"
   },
   "theme": "system",
   "enableInstallTelemetry": false,
