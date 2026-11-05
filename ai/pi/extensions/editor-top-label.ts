@@ -6,12 +6,16 @@ import type { ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-a
 // bottom border.
 
 export default function (pi: ExtensionAPI) {
+	let timer: ReturnType<typeof setInterval> | undefined;
+	// The captured ctx goes stale on session replacement; touching it after
+	// that throws and kills pi (e.g. RPC hosts sending new_session).
+	pi.on("session_shutdown", () => clearInterval(timer));
 	pi.on("session_start", (_event, ctx) => {
-		if (!ctx.hasUI || typeof ctx.ui.getEditorComponent !== "function") return;
+		if (ctx.mode !== "tui" || typeof ctx.ui.getEditorComponent !== "function") return;
 		// Local extensions load before packages, so vim-motions-pi installs its
 		// editor after this handler. Retry until a factory exists, then wrap it.
 		let attempts = 0;
-		const timer = setInterval(() => {
+		timer = setInterval(() => {
 			attempts++;
 			if (ctx.ui.getEditorComponent()) {
 				clearInterval(timer);

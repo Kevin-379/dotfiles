@@ -147,7 +147,9 @@ function scheduleSummary(pi: ExtensionAPI, ctx: ExtensionContext): void {
 	scheduled = true;
 	setTimeout(() => {
 		scheduled = false;
-		void updateSummary(pi, ctx);
+		// A session replaced mid-summary leaves ctx stale; every access then
+		// throws, and an unhandled rejection here would kill pi.
+		updateSummary(pi, ctx).catch(() => {});
 	}, 0);
 }
 
@@ -235,14 +237,14 @@ async function updateSummary(pi: ExtensionAPI, ctx: ExtensionContext, force = fa
 			const forceNext = rerunForced;
 			rerun = false;
 			rerunForced = false;
-			void updateSummary(pi, ctx, forceNext);
+			updateSummary(pi, ctx, forceNext).catch(() => {});
 		}
 	}
 }
 
 export default function (pi: ExtensionAPI) {
 	pi.on("message_end", (event, ctx) => {
-		if (event.message.role !== "user") return;
+		if (ctx.mode !== "tui" || event.message.role !== "user") return;
 		scheduleSummary(pi, ctx);
 	});
 
@@ -256,7 +258,7 @@ export default function (pi: ExtensionAPI) {
 			if (state) pi.setSessionName(titleFromOneLine(state.oneLine));
 
 			if (value === "run") {
-				void updateSummary(pi, ctx, true);
+				updateSummary(pi, ctx, true).catch(() => {});
 				ctx.ui.notify("Branch summary started", "info");
 				return;
 			}
