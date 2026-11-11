@@ -465,10 +465,12 @@ function pickRandom(): string {
 
 export default function (pi: ExtensionAPI) {
   pi.on("turn_start", async (_event, ctx) => {
+    if (ctx.mode !== "tui") return;
     ctx.ui.setWorkingMessage(pickRandom());
   });
 
   pi.on("turn_end", async (_event, ctx) => {
+    if (ctx.mode !== "tui") return;
     ctx.ui.setWorkingMessage(); // Reset for next time
   });
 }

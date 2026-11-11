@@ -3,7 +3,7 @@
     "npm",
     "--registry=https://registry.npmjs.org"
   ],
-  "lastChangelogVersion": "1.4.0",
+  "lastChangelogVersion": "1.5.0",
   "defaultProvider": "openai",
   "defaultModel": "sol",
   "steeringMode": "all",
@@ -17,8 +17,8 @@
     "npm:pi-context",
     "npm:pi-hermes-memory",
     "npm:pi-taskflow",
-    "git:github.com/Helmi/pi-event-monitor",
-    "npm:pi-custom-compaction"
+    "npm:pi-custom-compaction",
+    "npm:@clanker-code/pi-monitor"
   ],
   "powerline": {
     "preset": "custom",
@@ -53,5 +53,10 @@
   },
   "showLastPrompt": false,
   "tuiMode": "fullscreen",
-  "fullscreenExitOutput": "resume-hint"
+  "fullscreenExitOutput": "resume-hint",
+  "extensionChangelogVersions": {
+    "{\"source\":\"~/Personal/pi-powerline-footer\",\"scope\":\"user\"}": "0.15.1",
+    "{\"source\":\"npm:pi-custom-compaction\",\"scope\":\"user\"}": "0.2.5",
+    "{\"source\":\"npm:@clanker-code/pi-monitor\",\"scope\":\"user\"}": "0.2.0"
+  }
 }

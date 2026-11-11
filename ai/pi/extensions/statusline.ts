@@ -52,6 +52,7 @@ function progressBar(pct: number): string {
 
 export default function (pi: ExtensionAPI) {
 	pi.on("session_start", (_event, ctx) => {
+		if (ctx.mode !== "tui") return;
 		ctx.ui.setFooter((tui, theme, footerData) => {
 			const unsub = footerData.onBranchChange(() => tui.requestRender());
 

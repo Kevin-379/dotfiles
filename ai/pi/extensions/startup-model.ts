@@ -141,7 +141,7 @@ function parseShowOrClear(rawArgs?: string): { scope: Scope; action: "show" | "c
 
 export default function startupModelExtension(pi: ExtensionAPI) {
     pi.on("session_shutdown", (event, ctx) => {
-        if (event.reason !== "new" || !ctx.model) return;
+        if (ctx.mode !== "tui" || event.reason !== "new" || !ctx.model) return;
 
         getRuntimeState().pendingNewSessionModel = {
             model: `${ctx.model.provider}/${ctx.model.id}`,
@@ -150,6 +150,7 @@ export default function startupModelExtension(pi: ExtensionAPI) {
     });
 
     pi.on("session_start", async (event, ctx) => {
+        if (ctx.mode !== "tui") return;
         if (event.reason === "reload" || event.reason === "resume" || event.reason === "fork") return;
         if (event.reason === "startup" && ctx.sessionManager.buildSessionContext().messages.length > 0) return;
 
@@ -171,6 +172,7 @@ export default function startupModelExtension(pi: ExtensionAPI) {
             return filtered.length > 0 ? filtered.map((o) => ({ value: o, label: o })) : null;
         },
         handler: async (args, ctx) => {
+            if (ctx.mode !== "tui") return;
             if (wantsHelp(args)) {
                 ctx.ui.notify(
                     "Usage: /set-default-model (global). For project scope use /set-project-default-model or /set-default-model-project",
@@ -201,6 +203,7 @@ export default function startupModelExtension(pi: ExtensionAPI) {
     pi.registerCommand("set-project-default-model", {
         description: "Save current provider/model + thinking level to project startupModel (.pi/settings.json)",
         handler: async (_args, ctx) => {
+            if (ctx.mode !== "tui") return;
             if (!ctx.model) return ctx.ui.notify("No active model to save.", "warning");
 
             const startupModel: StartupModelConfig = {
@@ -218,6 +221,7 @@ export default function startupModelExtension(pi: ExtensionAPI) {
     pi.registerCommand("set-default-model-project", {
         description: "Alias for /set-project-default-model",
         handler: async (_args, ctx) => {
+            if (ctx.mode !== "tui") return;
             if (!ctx.model) return ctx.ui.notify("No active model to save.", "warning");
 
             const startupModel: StartupModelConfig = {
@@ -240,6 +244,7 @@ export default function startupModelExtension(pi: ExtensionAPI) {
             return filtered.length > 0 ? filtered.map((o) => ({ value: o, label: o })) : null;
         },
         handler: async (args, ctx) => {
+            if (ctx.mode !== "tui") return;
             if (wantsHelp(args)) {
                 ctx.ui.notify("Usage: /startup-model [show|clear] [--global|--project] (default: --global)", "info");
                 return;
