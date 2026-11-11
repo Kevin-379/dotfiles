@@ -10,10 +10,10 @@
   "followUpMode": "one-at-a-time",
   "quietStartup": true,
   "packages": [
-    "npm:pi-token-speed",
+    "-npm:pi-token-speed",
     "npm:vim-motions-pi",
-    "npm:@plannotator/pi-extension",
-    "~/Personal/pi-powerline-footer",
+    "-npm:@plannotator/pi-extension",
+    "-~/Personal/pi-powerline-footer",
     "npm:pi-context",
     "npm:pi-hermes-memory",
     "npm:pi-taskflow",
