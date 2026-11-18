@@ -251,6 +251,37 @@ export default function (pi) {
 		headers: HEADERS,
 		models: [
 			{
+				id: "gpt-6.2-sol",
+				name: "GPT-6.2 Sol",
+				api: "openai-responses",
+				reasoning: true,
+				thinkingLevelMap: {
+					off: "low",
+					minimal: "low",
+					max: "max",
+				},
+				input: ["text", "image"],
+				cost: { input: 2, output: 10, cacheRead: 0.1, cacheWrite: 2.5 },
+				contextWindow: 272000,
+				maxTokens: 128000,
+			},
+			{
+				id: "gpt-6.2-astra",
+				name: "GPT-6.2 Astra",
+				api: "openai-responses",
+				reasoning: true,
+				thinkingLevelMap: {
+					off: "low",
+					minimal: "low",
+					xhigh: "xhigh",
+					max: "max",
+				},
+				input: ["text", "image"],
+				cost: { input: 8, output: 40, cacheRead: 0.4, cacheWrite: 10 },
+				contextWindow: 272000,
+				maxTokens: 128000,
+			},
+			{
 				id: MODEL_TARGETS.sol.id,
 				name: "GPT-6.1 Sol",
 				api: "openai-responses",

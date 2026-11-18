@@ -36,10 +36,11 @@ test("model aliases route to registered physical models and preserve thinking le
 	const { aliases, modelRegistry } = setup();
 	assert.deepEqual(
 		[...aliases.keys()],
-		["openai/sol", "openai/luna", "anthropic/opus", "router/coding"],
+		["openai/sol", "openai/terra", "openai/luna", "anthropic/opus", "router/coding"],
 	);
 	for (const [alias, model] of [
 		["openai/sol", { provider: "openai", id: "gpt-6.1-sol", api: "openai-responses" }],
+		["openai/terra", { provider: "openai", id: "gpt-6.1-terra", api: "openai-responses" }],
 		["openai/luna", { provider: "openai", id: "gpt-6-luna", api: "openai-responses" }],
 		["anthropic/opus", { provider: "anthropic", id: "claude-opus-5-5", api: "anthropic-messages" }],
 		["router/coding", { provider: "openai", id: "gpt-6.1-sol", api: "openai-responses" }],
